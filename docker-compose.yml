@@ -1,0 +1,42 @@
+services:
+  postgres:
+    image: postgres:16
+    env_file: .env
+    ports: ["5432:5432"]
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  minio:
+    image: scnd/minio-mirror:RELEASE.2025-09-07T16-13-09Z
+    command: server /data --console-address ":9001"
+    env_file: .env
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+
+  airflow:
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
+    command: standalone
+    env_file: .env
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      PYTHONPATH: /opt/airflow/scripts
+    ports: ["8080:8080"]
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts
+      - ./dbt_project:/opt/airflow/dbt_project
+    depends_on: [postgres, minio]
+
+  metabase:
+    image: metabase/metabase
+    ports: ["3000:3000"]
+    depends_on: [postgres]
+
+volumes:
+  pg_data:
+  minio_data:
