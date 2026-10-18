@@ -36,6 +36,12 @@ flowchart LR
 | Silver | `staging` schema | Cleaned, typed, deduplicated |
 | Gold | `marts` schema | Analytics-ready tables for the dashboard |
 
+## Data Lineage
+
+![dbt lineage graph](docs/dbt-lineage.png)
+
+Lineage generated with `dbt docs generate`: raw → staging → marts.
+
 ## Tech Stack
 
 | Layer | Tool |

@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: fct_hourly_air_weather
+    description: Moi dong 1 gio, ghep du lieu khong khi + thoi tiet
+    columns:
+      - name: observed_at
+        data_tests: [unique, not_null]
+      - name: temperature_c
+        description: Thieu nhiet do chi canh bao, khong lam pipeline hong
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+
+  - name: mart_daily_summary
+    description: Tong hop chat luong khong khi va thoi tiet theo ngay
+    columns:
+      - name: observation_date
+        data_tests: [unique, not_null]
+      - name: aqi_category
+        description: Phan loai theo thang US AQI
+        data_tests:
+          - accepted_values:
+              values:
+                - 'Tốt'
+                - 'Trung bình'
+                - 'Không tốt cho nhóm nhạy cảm'
+                - 'Xấu'
+                - 'Rất xấu'
+                - 'Nguy hại'

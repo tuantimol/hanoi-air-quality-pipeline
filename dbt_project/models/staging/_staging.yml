@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_air_quality
+    description: Chat luong khong khi theo gio (da lam sach)
+    columns:
+      - name: observed_at
+        description: Thoi diem quan trac (Viet Nam, UTC+7)
+        data_tests: [unique, not_null]
+      - name: pm25
+        description: Bui min PM2.5 (µg/m^3)
+        data_tests: [not_null]
+      - name: aqi
+        description: Chi so US AQI
+
+  - name: stg_weather
+    description: Thoi tiet theo gio (da lam sach)
+    columns:
+      - name: observed_at
+        description: Thoi diem quan trac (Viet Nam, UTC+7)
+        data_tests: [unique, not_null]
