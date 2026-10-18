@@ -42,6 +42,16 @@ flowchart LR
 
 Lineage generated with `dbt docs generate`: raw → staging → marts.
 
+## Orchestration
+
+![Airflow DAG](docs/airflow-dag.png)
+![Airflow Grid](docs/airflow-grid.png)
+
+The `hanoi_air_quality` DAG runs daily at 00:00 UTC (07:00 Hanoi time) and
+processes the previous day: `extract` → `load` → `dbt_build`. Tasks retry
+twice on failure, and every step is idempotent so any day can be re-run or
+back-filled safely.
+
 ## Tech Stack
 
 | Layer | Tool |
@@ -133,7 +143,7 @@ docker compose down -v    # remove containers AND data
 - [x] Phase 2: Extract to the data lake (MinIO / Parquet)
 - [x] Phase 3: Load into PostgreSQL
 - [x] Phase 4: Transform with dbt (staging, marts, tests)
-- [ ] Phase 5: Orchestrate with Airflow
+- [x] Phase 5: Orchestrate with Airflow
 - [ ] Phase 6: Dashboard with Metabase
 - [ ] Phase 7: CI with GitHub Actions and dbt docs
 
