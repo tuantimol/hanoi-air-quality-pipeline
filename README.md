@@ -132,7 +132,7 @@ docker compose down -v    # remove containers AND data
 - [x] Phase 1: Infrastructure with Docker Compose
 - [x] Phase 2: Extract to the data lake (MinIO / Parquet)
 - [x] Phase 3: Load into PostgreSQL
-- [ ] Phase 4: Transform with dbt (staging, marts, tests)
+- [x] Phase 4: Transform with dbt (staging, marts, tests)
 - [ ] Phase 5: Orchestrate with Airflow
 - [ ] Phase 6: Dashboard with Metabase
 - [ ] Phase 7: CI with GitHub Actions and dbt docs
