@@ -52,6 +52,14 @@ processes the previous day: `extract` → `load` → `dbt_build`. Tasks retry
 twice on failure, and every step is idempotent so any day can be re-run or
 back-filled safely.
 
+## Dashboard
+
+![Hanoi Air Quality dashboard](docs/dashboard.png)
+
+Built in Metabase on top of the `marts` schema: latest AQI and PM2.5, daily and
+hourly PM2.5 trends, days per AQI category, humidity vs PM2.5, and the average
+daily pattern by hour.
+
 ## Tech Stack
 
 | Layer | Tool |
@@ -144,7 +152,7 @@ docker compose down -v    # remove containers AND data
 - [x] Phase 3: Load into PostgreSQL
 - [x] Phase 4: Transform with dbt (staging, marts, tests)
 - [x] Phase 5: Orchestrate with Airflow
-- [ ] Phase 6: Dashboard with Metabase
+- [x] Phase 6: Dashboard with Metabase
 - [ ] Phase 7: CI with GitHub Actions and dbt docs
 
 ## Data Source

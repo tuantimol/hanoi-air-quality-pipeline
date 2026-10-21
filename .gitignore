@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 dbt_project/target/
 dbt_project/logs/
+metabase-data/
